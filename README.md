@@ -46,6 +46,8 @@ python -m venv venv
 3. Activate:
 - Windows:
 venv\Scripts\activate
+- 
+- 
 
 4. Install dependency:
 pip install selenium
