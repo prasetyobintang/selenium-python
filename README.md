@@ -36,7 +36,8 @@ test.py
 ## ⚙️ Setup
 
 1. Clone repo:
-git clone https://github.com/prasetyobintang/selenium-python.git, 
+git clone https://github.com/prasetyobintang/selenium-python.git
+ 
 cd selenium-python
 
 2. Buat virtual environment:
@@ -45,9 +46,7 @@ python -m venv venv
 
 3. Activate:
 - Windows:
-venv\Scripts\activate
-- 
-- 
+venv\Scripts\activate 
 
 4. Install dependency:
 pip install selenium
