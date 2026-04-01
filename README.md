@@ -36,7 +36,7 @@ test.py
 ## ⚙️ Setup
 
 1. Clone repo:
-git clone https://github.com/prasetyobintang/selenium-python.git
+git clone https://github.com/prasetyobintang/selenium-python.git, 
 cd selenium-python
 
 2. Buat virtual environment:
