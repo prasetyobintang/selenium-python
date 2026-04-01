@@ -75,6 +75,7 @@ python main.py
 selenium-python/
 main.py
 test.py
+saucedemo_positive_case.py
 .gitignore
 README.md
 ```
