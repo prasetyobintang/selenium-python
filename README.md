@@ -21,7 +21,7 @@ Project sederhana untuk belajar **QA Automation** menggunakan **Python + Seleniu
 # Windows:
 venv\Scripts\activate
 # Mac/Linux:
-# source venv/bin/activate
+source venv/bin/activate
 4. python -m pip install --upgrade pip
 5. pip install selenium faker
 ```
