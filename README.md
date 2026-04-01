@@ -42,21 +42,28 @@ cd selenium-python
 ```
 
 2. Buat virtual environment:
+```
 python -m venv venv
+```
 
 
 3. Activate:
 - Windows:
+```
 venv\Scripts\activate 
+```
 
 4. Install dependency:
+```
 pip install selenium
+```
 
 ---
 
 ## ▶️ Run Test
+```
 python main.py
-
+```
 
 Browser akan terbuka dan melakukan login otomatis ke:
 
