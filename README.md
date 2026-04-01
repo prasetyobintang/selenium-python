@@ -1,11 +1,6 @@
-# 🧪 Selenium Python - Basic Login Automation
+# 🧪 Selenium Python - E2E Automation (SauceDemo)
 
-Project sederhana untuk belajar **QA Automation** menggunakan **Python + Selenium**.
-
-Tujuan utama:
-- Memahami dasar automation testing
-- Interaksi dengan web (input, klik, validasi)
-- Setup environment Python + Selenium
+Project sederhana untuk belajar **QA Automation** menggunakan **Python + Selenium** dengan flow end-to-end.
 
 ---
 
@@ -13,74 +8,65 @@ Tujuan utama:
 
 - Python
 - Selenium WebDriver
+- Faker (dummy data)
 - Chrome Browser
 
 ---
 
-## 📁 Struktur Project
-
-selenium-python/<br>
-venv/<br>
-.gitignore<br>
-main.py<br>
-README.md<br>
-test.py
-
----
-
 ## ⚙️ Setup
-
-1. Clone repo:
 ```
-git clone https://github.com/prasetyobintang/selenium-python.git
-cd selenium-python
-```
-
-2. Buat virtual environment:
-```
-python -m venv venv
-```
-
-3. Activate:
-- Windows:
-```
-venv\Scripts\activate 
-```
-
-4. Install dependency:
-```
-pip install selenium
+git clone https://github.com/prasetyobintang/selenium-python.git<br>
+cd selenium-python<br>
+python -m venv venv<br>
+venv\Scripts\activate<br>
+pip install selenium faker
 ```
 
 ---
 
-## ▶️ Run Test
+## ▶️ Run
 ```
 python main.py
 ```
 
-Browser akan terbuka dan melakukan login otomatis ke:
+---
 
-https://www.saucedemo.com/
+## 🧪 Test Flow
+
+1. Login dengan user valid  
+2. Validasi berhasil login (URL `/inventory.html`)  
+3. Validasi item di halaman inventory  
+4. Pilih 1 item & add to cart  
+5. Validasi item di cart  
+6. Checkout  
+7. Isi form (faker: first name, last name, zip)  
+8. Validasi:
+   - item total  
+   - tax  
+   - total (item + tax)  
+9. Finish checkout  
+10. Validasi order sukses  
 
 ---
 
-## ✅ Test Scenario
-
-- Input username & password
-- Klik login
-- Verifikasi berhasil login berdasarkan URL
+## 📁 Struktur Project
+```
+selenium-python/<br>
+main.py<br>
+test.py<br>
+.gitignore<br>
+README.md
+```
 
 ---
 
 ## 🧠 Notes
 
-Project ini dibuat untuk pembelajaran dasar QA Automation.
-
-Next improvement:
-- Tambah explicit wait
-- Refactor ke Page Object Model (POM)
-- Integrasi dengan test framework (pytest)
+- Menggunakan explicit wait untuk menghindari flaky test  
+- Validasi tidak hanya URL, tapi juga:
+  - data item
+  - perhitungan harga  
+- Faker digunakan untuk data input dinamis  
 
 ---
 
