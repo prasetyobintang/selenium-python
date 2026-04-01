@@ -20,10 +20,11 @@ Tujuan utama:
 ## 📁 Struktur Project
 
 selenium-python/
-│
-├── main.py
-├── .gitignore
-└── venv/
+venv/
+.gitignore
+main.py
+README.md
+
 
 ---
 
@@ -77,4 +78,4 @@ Next improvement:
 
 ## 👨‍💻 Author
 
-Veyrr ✨
+Prasetyo Bintang ✨
