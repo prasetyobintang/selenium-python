@@ -19,16 +19,11 @@ Tujuan utama:
 
 ## 📁 Struktur Project
 
-selenium-python/
-
-venv/
-
-.gitignore
-
-main.py
-
-README.md
-
+selenium-python/<br>
+venv/<br>
+.gitignore<br>
+main.py<br>
+README.md<br>
 test.py
 
 ---
