@@ -15,10 +15,10 @@ Project sederhana untuk belajar **QA Automation** menggunakan **Python + Seleniu
 
 ## ⚙️ Setup
 ```
-git clone https://github.com/prasetyobintang/selenium-python.git<br>
-cd selenium-python<br>
-python -m venv venv<br>
-venv\Scripts\activate<br>
+git clone https://github.com/prasetyobintang/selenium-python.git
+cd selenium-python
+python -m venv venv
+venv\Scripts\activate
 pip install selenium faker
 ```
 
@@ -51,10 +51,10 @@ python main.py
 
 ## 📁 Struktur Project
 ```
-selenium-python/<br>
-main.py<br>
-test.py<br>
-.gitignore<br>
+selenium-python/
+main.py
+test.py
+.gitignore
 README.md
 ```
 
