@@ -15,11 +15,15 @@ Project sederhana untuk belajar **QA Automation** menggunakan **Python + Seleniu
 
 ## ⚙️ Setup
 ```
-git clone https://github.com/prasetyobintang/selenium-python.git
-cd selenium-python
-python -m venv venv
+1. git clone https://github.com/prasetyobintang/selenium-python.git
+2. cd selenium-python
+3. python -m venv venv
+# Windows:
 venv\Scripts\activate
-pip install selenium faker
+# Mac/Linux:
+# source venv/bin/activate
+4. python -m pip install --upgrade pip
+5. pip install selenium faker
 ```
 
 ---
