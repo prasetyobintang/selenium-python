@@ -42,6 +42,7 @@ python -m venv venv
 ```
 
 3. Activate:
+---
 - Windows:
 ```
 venv\Scripts\activate 
