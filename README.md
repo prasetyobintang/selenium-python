@@ -14,16 +14,33 @@ Project sederhana untuk belajar **QA Automation** menggunakan **Python + Seleniu
 ---
 
 ## ⚙️ Setup
+## 📦 Dependencies
+
+### Core
+- selenium
+- faker
+
+### Optional / Future Improvement
+- pytest (test runner)
+- webdriver-manager (auto driver management)
+- pytest-html (reporting)
+
+1. pastikan Python berada di PATH, cek: 
 ```
-1. git clone https://github.com/prasetyobintang/selenium-python.git
-2. cd selenium-python
-3. python -m venv venv
-# Windows:
-venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
-4. python -m pip install --upgrade pip
-5. pip install selenium faker
+python --version
+```
+2. pastikan pip juga sudah terinstall, cek: 
+```
+pip --version
+```
+3. upgrade pip:
+```
+python -m pip install --upgrade pip
+```
+4. install core dependency:
+```
+pip install selenium
+pip install faker
 ```
 
 ---
