@@ -41,7 +41,6 @@ cd selenium-python
 python -m venv venv
 ```
 
-
 3. Activate:
 - Windows:
 ```
