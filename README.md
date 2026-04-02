@@ -73,9 +73,12 @@ python main.py
 ## 📁 Struktur Project
 ```
 selenium-python/
+tests/
+    positive/   
+        saucedemo_positive.py
+    negative/
 main.py
 test.py
-saucedemo_positive_case.py
 .gitignore
 README.md
 ```
