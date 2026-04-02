@@ -97,4 +97,4 @@ README.md
 
 ## 👨‍💻 Author
 
-Prasetyo Bintang ✨
+Prasetyo Bintang Arummardi ✨
