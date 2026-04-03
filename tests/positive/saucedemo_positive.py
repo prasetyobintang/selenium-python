@@ -64,8 +64,8 @@ try:
     items = wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, "inventory_item_name")))
     
     # ambil text semua item
-    item_names = [item.text for item in items]
-    print(f"Nama item yang ditemukan: {item_names}")
+    # item_names = [item.text for item in items]
+    # print(f"Nama item yang ditemukan: {item_names}")
     
     # validasi item tertentu opsional
     # expected_items= [
