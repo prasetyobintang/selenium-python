@@ -14,6 +14,7 @@ Project sederhana untuk belajar **QA Automation** menggunakan **Python + Seleniu
 ---
 
 ## ⚙️ Setup
+
 ## 📦 Dependencies
 
 ### Core
@@ -25,23 +26,30 @@ Project sederhana untuk belajar **QA Automation** menggunakan **Python + Seleniu
 - webdriver-manager (auto driver management)
 - pytest-html (reporting)
 
-1. pastikan Python berada di PATH, cek: 
+1. Clone repo:
 ```
-python --version
+git clone https://github.com/prasetyobintang/selenium-python.git
+
+cd selenium-python
 ```
-2. pastikan pip juga sudah terinstall, cek: 
+2. Buat virtual environment:
 ```
-pip --version
+python -m venv venv
 ```
-3. upgrade pip:
+3. Aktifkan virtual environment:
+```
+Windows: venv\Scripts\activate
+Mac/Linux: source venv/bin/activate
+```
+4. Update pip:
 ```
 python -m pip install --upgrade pip
 ```
-4. install core dependency:
+5. Install dependency:
 ```
-pip install selenium
-pip install faker
+pip install selenium faker
 ```
+> Note: Pastikan virtual environment sudah aktif sebelum install dependency 
 
 ---
 
@@ -74,9 +82,10 @@ python main.py
 ```
 selenium-python/
 tests/
+    negative/
+        saucedemo_negative.py
     positive/   
         saucedemo_positive.py
-    negative/
 main.py
 test.py
 .gitignore
