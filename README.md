@@ -67,6 +67,7 @@ python main.py
 
 ## 🧪 Test Flow
 ### ✅ Positive Flow
+```
 Login dengan user valid
 Validasi redirect ke /inventory.html
 Validasi item muncul di halaman inventory
@@ -80,11 +81,14 @@ tax
 total (item + tax)
 Finish checkout
 Validasi order sukses
+```
 
 ### ❌ Negative Flow
+```
 Login dengan credential tidak valid
 Validasi error message muncul
 Validasi isi error message sesuai expected
+```
 
 ---
 
