@@ -31,7 +31,10 @@ Project sederhana untuk belajar **QA Automation** menggunakan **Python + Seleniu
 ## ⚙️ Setup
 
 1. Clone repository:
-
+```
+git clone https://github.com/prasetyobintang/selenium-python.git
+cd selenium-python
+```
 2. Buat virtual environment:
 ```
 python -m venv venv
