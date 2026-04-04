@@ -68,26 +68,26 @@ python main.py
 ## 🧪 Test Flow
 ### ✅ Positive Flow
 ```
-Login dengan user valid
-Validasi redirect ke /inventory.html
-Validasi item muncul di halaman inventory
-Pilih item & add to cart
-Validasi item di cart
-Checkout
-Isi form (faker: first name, last name, zip)
-Validasi:
-item total
-tax
-total (item + tax)
-Finish checkout
-Validasi order sukses
+1. 2Login dengan user valid
+2. Validasi redirect ke /inventory.html
+3. Validasi item muncul di halaman inventory
+4. Pilih item & add to cart
+5. Validasi item di cart
+6. Checkout
+7. Isi form (faker: first name, last name, zip)
+8. Validasi:
+   - Item total sesuai perhitungan
+   - Tax dihitung dengan benar
+   - Total akhir = item total + tax
+9. Finish checkout
+10. Validasi order sukses
 ```
 
 ### ❌ Negative Flow
 ```
-Login dengan credential tidak valid
-Validasi error message muncul
-Validasi isi error message sesuai expected
+1. Login dengan credential tidak valid
+2. Validasi error message muncul
+3. Validasi isi error message sesuai expected
 ```
 
 ---
