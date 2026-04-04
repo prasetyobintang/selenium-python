@@ -98,10 +98,10 @@ selenium-python/
             saucedemo_positive.py
         simulasi/
             user_behavior.py
-.gitignore
-main.py
-README.md
-test.py
+    .gitignore
+    main.py
+    README.md
+    test.py
 ```
 
 ---
