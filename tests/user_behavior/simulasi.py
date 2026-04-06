@@ -1,3 +1,6 @@
+# === Simulasi User Behavior: Login dan Refresh ===
+
+# === Import Libraries Dependend===
 import time
 import random
 from selenium import webdriver
@@ -26,7 +29,7 @@ wait = WebDriverWait(driver, 10)
 actions = ActionChains(driver)
 
 # === Helper ===
-def random_delay(a=0.3, b=1.2):
+def random_delay(a=0.3, b=1.0):
     time.sleep(random.uniform(a, b))
 
 def human_typing(element, text):
@@ -35,31 +38,87 @@ def human_typing(element, text):
         time.sleep(random.uniform(0.05, 0.15))
 
 def move_and_click(element):
-    actions.move_to_element(element).pause(random.uniform(0.2, 0.6)).click().perform()
+    actions.move_to_element(element).pause(random.uniform(0.2, 0.5)).click().perform()
 
-# === Flow: INVALID LOGIN ===
+def check_navigation_type(label):
+    nav_type = driver.execute_script(
+        "return performance.getEntriesByType('navigation')[0].type"
+    )
+    print(f"{label}: {nav_type}")
 
-# Tunggu field muncul dulu (ini penting)
+# === STEP 1: INVALID LOGIN ===
+print("\n=== STEP 1: INVALID LOGIN ===")
+
 username = wait.until(EC.presence_of_element_located((By.ID, "user-name")))
 password = wait.until(EC.presence_of_element_located((By.ID, "password")))
 
-# Isi form (sengaja salah)
-human_typing(username, "standard_use")
+human_typing(username, "standard_used")  # sengaja salah
 random_delay()
 
 human_typing(password, "secret_sauce")
 random_delay()
 
-# Klik login
 login_btn = driver.find_element(By.ID, "login-button")
 move_and_click(login_btn)
 
-# Validasi error muncul
-error_msg = wait.until(
-    EC.visibility_of_element_located((By.CSS_SELECTOR, ".error-message-container.error"))
-)
+time.sleep(1)
 
-print("Error muncul:", error_msg.is_displayed())
-print("Isi error:", error_msg.text)
+print("URL setelah login gagal:", driver.current_url)
+check_navigation_type("After invalid login")
 
-assert "Epic sadface" in error_msg.text
+# === STEP 2: REFRESH OBSERVATION ===
+print("\n=== STEP 2: REFRESH OBSERVATION ===")
+
+check_navigation_type("Before refresh")
+
+# kasih marker visual (opsional tapi satisfying 😏)
+driver.execute_script("document.body.style.background = 'red'")
+time.sleep(1)
+
+driver.refresh()
+
+time.sleep(2)
+
+check_navigation_type("After refresh")
+
+# === STEP 3: VALID LOGIN ===
+print("\n=== STEP 3: VALID LOGIN ===")
+
+username = wait.until(EC.presence_of_element_located((By.ID, "user-name")))
+password = wait.until(EC.presence_of_element_located((By.ID, "password")))
+
+username.clear()
+password.clear()
+
+human_typing(username, "standard_user")
+random_delay()
+
+human_typing(password, "secret_sauce")
+random_delay()
+
+login_btn = driver.find_element(By.ID, "login-button")
+move_and_click(login_btn)
+
+# tunggu inventory muncul
+wait.until(EC.presence_of_element_located((By.CLASS_NAME, "inventory_list")))
+
+print("Login sukses, URL:", driver.current_url)
+check_navigation_type("After valid login")
+
+# === STEP 4: REFRESH SETELAH LOGIN ===
+print("\n=== STEP 4: REFRESH SETELAH LOGIN ===")
+
+check_navigation_type("Before refresh (inventory)")
+
+driver.refresh()
+
+time.sleep(2)
+
+wait.until(EC.presence_of_element_located((By.CLASS_NAME, "inventory_list")))
+
+check_navigation_type("After refresh (inventory)")
+
+print("Masih di inventory:", driver.current_url)
+
+# === DONE ===
+driver.quit()
