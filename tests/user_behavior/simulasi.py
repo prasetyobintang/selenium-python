@@ -133,8 +133,19 @@ print("\n=== STEP 2: REFRESH OBSERVATION ===")
 check_navigation_type("Before refresh")
 
 # kasih marker visual (opsional tapi satisfying 😏)
-driver.execute_script("document.body.style.background = 'red'")
-time.sleep(1)
+driver.execute_script("""
+let div = document.createElement('div');
+div.innerText = 'Check Refresh';
+div.style.position = 'fixed';
+div.style.top = '50%';
+div.style.left = '50%';
+div.style.transform = 'translate(-50%, -50%)';
+div.style.fontSize = '50px';
+div.style.color = 'red';
+div.style.zIndex = '9999';
+document.body.appendChild(div);
+""")
+time.sleep(2)
 
 driver.refresh()
 
