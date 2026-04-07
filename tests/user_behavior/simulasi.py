@@ -9,6 +9,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 # === Setup driver ===
 options = Options()
@@ -26,26 +27,86 @@ driver.maximize_window()
 driver.get("https://www.saucedemo.com/")
 
 wait = WebDriverWait(driver, 10)
-actions = ActionChains(driver)
+# actions = ActionChains(driver)
 
 # === Helper ===
 def random_delay(a=0.3, b=1.0):
     time.sleep(random.uniform(a, b))
 
-def human_typing(element, text):
+def human_typing(element, text, typo_chance=0.1):
     for char in text:
+        if random.random() < typo_chance:
+            wrong_char = random.choice("abcdefghijklmnopqrstuvwxyz")
+            element.send_keys(wrong_char)
+            time.sleep(random.uniform(0.05, 0.15))
+            element.send_keys("\b")  # backspace
+            time.sleep(random.uniform(0.05, 0.15))
+        
         element.send_keys(char)
-        time.sleep(random.uniform(0.05, 0.15))
+        time.sleep(random.uniform(0.05, 0.2))
 
-def move_and_click(element):
-    actions.move_to_element(element).pause(random.uniform(0.2, 0.5)).click().perform()
+def move_and_click(driver, element):
+    ActionChains(driver)\
+        .move_to_element(element)\
+        .pause(random.uniform(0.2, 0.5))\
+        .click()\
+        .perform()
 
 def check_navigation_type(label):
     nav_type = driver.execute_script(
         "return performance.getEntriesByType('navigation')[0].type"
     )
     print(f"{label}: {nav_type}")
+    
+def random_scroll(driver):
+    scroll_amount = random.randint(100, 400)
+    driver.execute_script(f"window.scrollBy(0, {scroll_amount});")
+    time.sleep(random.uniform(0.3, 0.8))    
+    
+def scroll_to_footer(driver, wait):
+    last_height = driver.execute_script("return document.body.scrollHeight")
+    
+    while True:
+        # scroll ke bawah
+        scroll_step = random.choice([150, 250, 400, 600])
+        pause = random.choice([0.3, 0,6, 1.2])
+        driver.execute_script(f"window.scrollBy(0, {scroll_step});")
+        time.sleep(random.uniform(0.4, 1.0))
 
+        # cek footer muncul
+        try:
+            footer = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "footer_copy")))
+            return footer
+        except:
+            pass
+        
+        # cek udah mentok
+        new_height = driver.execute_script("return window.pageYOffset + window.innerHeight")
+        if new_height >= last_height:
+            break
+
+def click_twitter_footer(driver, wait):
+    twitter = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "social_twitter")))
+    
+    # scroll ke twitter dulu
+    driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", twitter)
+    time.sleep(random.uniform(0.5, 1.0))
+
+    # tunggu keliatan
+    try:
+        ActionChains(driver)\
+            .move_to_element(twitter)\
+            .pause(random.uniform(0.3, 0.7))\
+            .click()\
+            .perform() 
+    except:            
+        # fallback klik biasa
+        driver.execute_script("arguments[0].click();", twitter)
+    time.sleep(random.uniform(0.5, 1.2))
+    
+    # klik
+    # twitter.click()  
+    
 # === STEP 1: INVALID LOGIN ===
 print("\n=== STEP 1: INVALID LOGIN ===")
 
@@ -58,8 +119,8 @@ random_delay()
 human_typing(password, "secret_sauce")
 random_delay()
 
-login_btn = driver.find_element(By.ID, "login-button")
-move_and_click(login_btn)
+login_btn = driver.find_element(By.CSS_SELECTOR, ".submit-button.btn_action")
+move_and_click(driver, login_btn)
 
 time.sleep(1)
 
@@ -96,8 +157,8 @@ random_delay()
 human_typing(password, "secret_sauce")
 random_delay()
 
-login_btn = driver.find_element(By.ID, "login-button")
-move_and_click(login_btn)
+login_btn = driver.find_element(By.CSS_SELECTOR, ".submit-button.btn_action")
+move_and_click(driver, login_btn)
 
 # tunggu inventory muncul
 wait.until(EC.presence_of_element_located((By.CLASS_NAME, "inventory_list")))
@@ -119,6 +180,35 @@ wait.until(EC.presence_of_element_located((By.CLASS_NAME, "inventory_list")))
 check_navigation_type("After refresh (inventory)")
 
 print("Masih di inventory:", driver.current_url)
+
+# === STEP 5: SCROLL & INTERACT ===
+print("\n=== STEP 5: SCROLL & INTERACT ===")
+
+scroll_to_footer(driver, wait)
+random_delay()
+
+click_twitter_footer(driver, wait)
+
+driver.switch_to.window(driver.window_handles[-1])  # pindah ke tab baru
+time.sleep(random.uniform(1.0, 2.0))
+
+print("Klik Twitter footer, URL sekarang:", driver.current_url)
+
+# === STEP 6: MAKE SURE DI TWITTER ===
+# Cek URL dan bio twitter dan double click bio buat highlight (biar keliatan)
+print("\n=== STEP 6: MAKE SURE DI TWITTER ===")
+try:
+    bio_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div[data-testid='UserDescription']")))
+    bio_text = bio_element.text
+    
+    # === EXPERIMENT ===: double click highlight (disabled for stability) ===
+    # ActionChains(driver).double_click(bio_element).perform()
+    # time.sleep(random.uniform(0.5, 1.0))
+    
+except TimeoutException:
+    bio_text = "Gagal ambil bio Twitter"
+
+print(f"Bio Twitter: {bio_text}")
 
 # === DONE ===
 driver.quit()
